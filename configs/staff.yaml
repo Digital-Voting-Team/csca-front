@@ -1,0 +1,21 @@
+log:
+  disable_sentry: true
+  level: "info"
+
+db:
+  url: "postgres://postgres:postgres@staff-db/postgres?sslmode=disable"
+
+listener:
+  addr: :9102
+
+endpoints:
+  docker: true
+  services:
+    - service: "auth-service"
+      entry_points:
+        - "localhost:9110/jwt/login"
+        - "auth-service:9110/jwt/login"
+
+
+cop:
+  disabled: true

@@ -27,7 +27,7 @@ const handleSubmit = async () => {
   await signup(email.value, password.value, displayName.value);
 
   if (!error.value) {
-    userStorage.setUsername(this.email.value);
+    userStorage.setUsername(email.value);
     userStorage.displayName = "Some name";
     userStorage.isLoggedIn = true;
   }

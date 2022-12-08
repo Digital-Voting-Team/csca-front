@@ -9,11 +9,10 @@ const signup = async (email, password, displayName) => {
   isPending.value = true;
 
   try {
-    console.log(displayName);
     const res = await authReq("register", email, password);
-    if (res.data === undefined) {
-      throw new Error("Could not complete signup");
-    }
+    console.log(displayName);
+    console.log(res);
+
     error.value = null;
     isPending.value = false;
 
