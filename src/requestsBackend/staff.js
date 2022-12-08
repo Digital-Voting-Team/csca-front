@@ -11,10 +11,7 @@ async function fetchWithTokenAsync(url, token) {
 }
 
 async function staffReq(token) {
-  let endpoint =
-    process.env.NODE_ENV === "production"
-      ? process.env.VUE_APP_GET_STAFF
-      : process.env.VUE_APP_GET_STAFF_LOCAL;
+  let endpoint = process.env.VUE_APP_GET_STAFF;
 
   return await fetchWithTokenAsync(endpoint, token);
 }

@@ -1,8 +1,70 @@
 version: '3.3'
 
 services:
+  auth-service:
+    restart: unless-stopped
+    image: auth-local
+    ports:
+      - "9110:9110"
+    depends_on:
+      - auth-db
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    volumes:
+      - ./configs/auth.yaml:/config.yaml
+    entrypoint: sh -c "auth-service migrate up && auth-service run service"
+
+  auth-db:
+    image: postgres
+    restart: always
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - PGDATA=/data/pgdata
+      - ENSUREDB=1
+    volumes:
+      - auth-db:/var/lib/postgresql/data
+
+  staff-service:
+    restart: unless-stopped
+    image: kyrylrs/staff-service
+    ports:
+      - "9102:9102"
+    depends_on:
+      - staff-db
+      - auth-service
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    volumes:
+      - ./configs/staff.yaml:/config.yaml
+    entrypoint: sh -c "staff-service migrate up && staff-service run service"
+
+
+  staff-db:
+    image: postgres
+    restart: always
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - PGDATA=/data/pgdata
+      - ENSUREDB=1
+    volumes:
+      - staff-db:/var/lib/postgresql/data
+
   web_client:
     build: .
     restart: unless-stopped
     ports:
       - "8060:80"
+
+volumes:
+  staff-db:
+    driver: local
+  auth-db:
+    driver: local

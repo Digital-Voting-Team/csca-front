@@ -40,22 +40,13 @@ async function authReq(
   let endpoint;
   switch (type) {
     case "login":
-      endpoint =
-        process.env.NODE_ENV === "production"
-          ? process.env.VUE_APP_LOGIN
-          : process.env.VUE_APP_LOGIN_LOCAL;
+      endpoint = process.env.VUE_APP_LOGIN;
       break;
     case "register":
-      endpoint =
-        process.env.NODE_ENV === "production"
-          ? process.env.VUE_APP_REGISTER
-          : process.env.VUE_APP_REGISTER_LOCAL;
+      endpoint = process.env.VUE_APP_REGISTER;
       break;
     case "logout":
-      endpoint =
-        process.env.NODE_ENV === "production"
-          ? process.env.VUE_APP_LOGOUT
-          : process.env.VUE_APP_LOGOUT_LOCAL;
+      endpoint = process.env.VUE_APP_LOGOUT;
       break;
     default:
       break;
