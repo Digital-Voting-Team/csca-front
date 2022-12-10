@@ -11,14 +11,20 @@
 //   return SHA256(string);
 // }
 
+const { AuthRecord } = require("@/js/records/auth.record");
+const { AddStaff } = require("@/requestsBackend/staff");
+const { StaffRecord } = require("@/js/records/staff.record");
+const { CustomerRecord } = require("@/js/records/customer.record");
+const { AddCustomer } = require("@/requestsBackend/customer");
+
 async function fetchAsync(url, body) {
   const response = await fetch(url, {
     method: "POST",
     headers: {
       Accept: "*/*",
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify(body, null, 2),
+    body: JSON.stringify(body, null, 2)
   });
 
   return await response.json();
@@ -55,7 +61,46 @@ async function authReq(
   return await fetchAsync(endpoint, body);
 }
 
+async function fullStaffRegistration(
+  staff,
+  token,
+  username = "AlexDef2",
+  password = "string"
+) {
+  try {
+    const authResp = new AuthRecord(
+      (await authReq("register", username, password)).data
+    );
+    const staffResp = await AddStaff(staff, "0", authResp.user_id, token);
+    return new StaffRecord(staffResp.data);
+  } catch (e) {
+    console.log(e);
+  }
+  return null;
+}
+
+async function fullCustomerRegistration(
+  customer,
+  username = "AlexDef2",
+  password = "string"
+) {
+  try {
+    const authResp = new AuthRecord(
+      (await authReq("register", username, password)).data
+    );
+    const customerResp = await AddCustomer(
+      customer,
+      authResp.user_id,
+      authResp.token
+    );
+    return new CustomerRecord(customerResp.data);
+  } catch (e) {
+    console.log(e);
+  }
+  return null;
+}
+
 module.exports = {
   authReq,
-  fetchAsync,
+  fetchAsync
 };
