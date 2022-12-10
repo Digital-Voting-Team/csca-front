@@ -6,9 +6,6 @@
       </template>
       <template v-else>
         <template v-if="list.length">
-          <!--          <div class="some-component__list">-->
-          <!--            <StaffTemplate :staff_="list" />-->
-          <!--          </div>-->
           <StaffTemplate :staff_="list" />
         </template>
         <template v-else>
@@ -35,7 +32,7 @@ import CollectionLoader from "@/vue/common/CollectionLoader";
 import { ErrorHandler } from "@/js/helpers/error-handler";
 
 import { useAuthUserStore } from "@/stores/auth-user";
-import { staffReq } from "@/requestsBackend/staff";
+import { GetStaffList } from "@/requestsBackend/staff";
 import { StaffRecord } from "@/js/records/staff.record";
 import StaffTemplate from "@/components/StaffTemplate.vue";
 
@@ -58,7 +55,7 @@ export default {
       const userStorage = useAuthUserStore();
       let response;
       try {
-        response = await staffReq(userStorage.token);
+        response = await GetStaffList(userStorage.token);
       } catch (error) {
         this.isLoadFailed = true;
         ErrorHandler.processWithoutFeedback(error);
@@ -68,16 +65,19 @@ export default {
       return response;
     },
     setList(data) {
+      console.log("set");
       console.log(data);
       if (data !== undefined) {
-        this.list = data.map((el) => {
-          return new StaffRecord(el);
+        this.list = data.data.map((el) => {
+          return new StaffRecord(el, data.included);
         });
       }
     },
     concatList(chunk) {
       if (chunk !== undefined) {
-        this.list = this.list.concat(chunk.map((el) => new StaffRecord(el)));
+        this.list = this.list.concat(
+          chunk.data.map((el) => new StaffRecord(el, chunk.included))
+        );
       }
     },
   },

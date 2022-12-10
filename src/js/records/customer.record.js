@@ -1,5 +1,4 @@
 import { PersonRecord } from "@/js/records/person.record";
-import { PositionRecord } from "@/js/records/position.record";
 
 export class CustomerRecord {
   constructor(record, included) {

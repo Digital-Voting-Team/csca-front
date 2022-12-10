@@ -1,21 +1,24 @@
 <template>
   <h1>Staff list:</h1>
   <div id="staff_list" v-for="staff in staff_" :key="staff.id">
-    <div class="single">
-      <div class="info">
-        <h3>{{ staff.name }}</h3>
-        <p>Employment date: {{ staff.employment_date }}</p>
+    <router-link
+      :to="{
+        name: 'StaffDetails',
+        params: { id: staff.id },
+      }"
+    >
+      <div class="single">
+        <div class="info">
+          <h3>{{ staff.person.name || "Name" }}</h3>
+          <p>Employment date: {{ staff.employment_date || "date" }}</p>
+        </div>
+        <div class="staff-salary">
+          <p>salary {{ staff.salary || "0" }}$</p>
+        </div>
       </div>
-      <div class="song-number">
-        <p>salary {{ staff.salary }}$</p>
-      </div>
-    </div>
+    </router-link>
   </div>
 </template>
-
-<!--    <router-link :to="{ name: 'StaffDetails', params: { id: staff.id } }">-->
-<!--      -->
-<!--    </router-link>-->
 
 <script>
 export default {
@@ -52,7 +55,7 @@ img {
 .info {
   margin: 0 30px;
 }
-.song-number {
+.staff-salary {
   margin-left: auto;
 }
 </style>

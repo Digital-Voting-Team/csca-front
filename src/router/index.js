@@ -4,6 +4,7 @@ import Login from "../views/auth/LoginView.vue";
 import Signup from "../views/auth/SignupView.vue";
 import { useAuthUserStore } from "@/stores/auth-user";
 import StaffView from "@/views/StaffView.vue";
+import StaffDetails from "@/components/details/StaffDetails.vue";
 
 const routes = [
   {
@@ -30,19 +31,13 @@ const routes = [
     component: StaffView,
     meta: { requiresAuth: false },
   },
-  // {
-  //   path: "/staff/create",
-  //   name: "CreateStaff",
-  //   component: CreateStaff,
-  //   meta: { requiresAuth: true },
-  // },
-  // {
-  //   path: "/staff/:id",
-  //   name: "StaffDetails",
-  //   component: StaffDetails,
-  //   props: true,
-  //   meta: { requiresAuth: true },
-  // },
+  {
+    path: "/staff/:id",
+    name: "StaffDetails",
+    component: StaffDetails,
+    props: true,
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = createRouter({

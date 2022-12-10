@@ -4,8 +4,8 @@ async function FetchWithTokenAsync(url, token) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
-    }
+      Authorization: token,
+    },
   });
   return await response.json();
 }
@@ -30,8 +30,8 @@ async function DeleteStaffById(token, id) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
-    }
+      Authorization: token,
+    },
   });
 
   return await response.json();
@@ -47,34 +47,34 @@ async function AddStaff(staff, cafe_id, user_id, token) {
         person: {
           data: {
             id: staff.person.id,
-            type: "person"
-          }
+            type: "person",
+          },
         },
         position: {
           data: {
             id: staff.position.id,
-            type: "position"
-          }
+            type: "position",
+          },
         },
         cafe: {
           data: {
             id: cafe_id,
-            type: "cafe_ref"
-          }
+            type: "cafe_ref",
+          },
         },
         user: {
           data: {
             id: user_id,
-            type: "user_ref"
-          }
-        }
+            type: "user_ref",
+          },
+        },
       },
       attributes: {
         employment_date: staff.employment_date,
         salary: staff.salary,
-        status: staff.status
-      }
-    }
+        status: staff.status,
+      },
+    },
   };
 
   const response = await fetch(endpoint, {
@@ -82,9 +82,9 @@ async function AddStaff(staff, cafe_id, user_id, token) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
+      Authorization: token,
     },
-    body: JSON.stringify(body, null, 2)
+    body: JSON.stringify(body, null, 2),
   });
 
   return response.json();
@@ -100,34 +100,34 @@ async function UpdateStaffById(staff, cafe_id, user_id, token, id) {
         person: {
           data: {
             id: staff.person.id,
-            type: "person"
-          }
+            type: "person",
+          },
         },
         position: {
           data: {
             id: staff.position.id,
-            type: "position"
-          }
+            type: "position",
+          },
         },
         cafe: {
           data: {
             id: cafe_id,
-            type: "cafe_ref"
-          }
+            type: "cafe_ref",
+          },
         },
         user: {
           data: {
             id: user_id,
-            type: "user_ref"
-          }
-        }
+            type: "user_ref",
+          },
+        },
       },
       attributes: {
         employment_date: staff.employment_date,
         salary: staff.salary,
-        status: staff.status
-      }
-    }
+        status: staff.status,
+      },
+    },
   };
 
   const response = await fetch(endpoint, {
@@ -135,19 +135,18 @@ async function UpdateStaffById(staff, cafe_id, user_id, token, id) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
+      Authorization: token,
     },
-    body: JSON.stringify(body, null, 2)
+    body: JSON.stringify(body, null, 2),
   });
 
   return response.json();
 }
 
 module.exports = {
-  FetchWithTokenAsync,
   GetStaffList,
   GetStaffById,
   DeleteStaffById,
   AddStaff,
-  UpdateStaffById
+  UpdateStaffById,
 };

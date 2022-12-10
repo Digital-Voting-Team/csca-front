@@ -1,4 +1,14 @@
-import { FetchWithTokenAsync } from "@/requestsBackend/staff";
+async function FetchWithTokenAsync(url, token) {
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  });
+  return await response.json();
+}
 
 async function GetPersonList(token) {
   let endpoint = process.env.VUE_APP_GET_PERSON;
@@ -20,8 +30,8 @@ async function DeletePersonById(token, id) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
-    }
+      Authorization: token,
+    },
   });
 
   return await response.json();
@@ -31,22 +41,24 @@ async function AddPerson(person, token) {
   let endpoint = process.env.VUE_APP_GET_PERSON;
 
   const body = {
-    id: "1",
-    type: "person",
-    relationships: {
-      address: {
-        data: {
-          id: person.address.id,
-          type: "address"
-        }
-      }
+    data: {
+      id: "1",
+      type: "person",
+      relationships: {
+        address: {
+          data: {
+            id: person.address.id,
+            type: "address",
+          },
+        },
+      },
+      attributes: {
+        name: person.name,
+        phone: person.phone,
+        email: person.email,
+        birthday: person.birthday,
+      },
     },
-    attributes: {
-      name: person.name,
-      phone: person.phone,
-      email: person.email,
-      birthday: person.birthday
-    }
   };
 
   const response = await fetch(endpoint, {
@@ -54,9 +66,9 @@ async function AddPerson(person, token) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
+      Authorization: token,
     },
-    body: JSON.stringify(body, null, 2)
+    body: JSON.stringify(body, null, 2),
   });
 
   return response.json();
@@ -66,22 +78,24 @@ async function UpdatePersonById(person, token, id) {
   let endpoint = process.env.VUE_APP_GET_PERSON + "/" + id;
 
   const body = {
-    id: "1",
-    type: "person",
-    relationships: {
-      address: {
-        data: {
-          id: person.address.id,
-          type: "address"
-        }
-      }
+    data: {
+      id: "1",
+      type: "person",
+      relationships: {
+        address: {
+          data: {
+            id: person.address.id,
+            type: "address",
+          },
+        },
+      },
+      attributes: {
+        name: person.name,
+        phone: person.phone,
+        email: person.email,
+        birthday: person.birthday,
+      },
     },
-    attributes: {
-      name: person.name,
-      phone: person.phone,
-      email: person.email,
-      birthday: person.birthday
-    }
   };
 
   const response = await fetch(endpoint, {
@@ -89,19 +103,18 @@ async function UpdatePersonById(person, token, id) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
+      Authorization: token,
     },
-    body: JSON.stringify(body, null, 2)
+    body: JSON.stringify(body, null, 2),
   });
 
   return response.json();
 }
 
 module.exports = {
-  FetchWithTokenAsync,
   GetPersonList,
   GetPersonById,
   DeletePersonById,
   AddPerson,
-  UpdatePersonById
+  UpdatePersonById,
 };

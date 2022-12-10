@@ -15,14 +15,14 @@ export class StaffRecord {
           record.relationships.person.data.id === item.id &&
           item.type === "person"
         ) {
-          this.person = new PersonRecord(item.data, undefined);
+          this.person = new PersonRecord(item, undefined);
         }
 
         if (
           record.relationships.position.data.id === item.id &&
           item.type === "position"
         ) {
-          this.position = new PositionRecord(item.data);
+          this.position = new PositionRecord(item);
         }
       }
     }

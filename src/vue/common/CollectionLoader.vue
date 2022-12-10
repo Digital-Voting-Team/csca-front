@@ -71,8 +71,8 @@ export default {
     async loadPage(eventName, loaderFn) {
       try {
         const response = await loaderFn();
-        console.log(response.data);
-        this.$emit(eventName, response.data);
+        console.log(response);
+        this.$emit(eventName, response);
         this.nextPageLoader = response.fetchNext;
         this.isCollectionFetched = response.data.length < this.pageLimit;
       } catch (e) {

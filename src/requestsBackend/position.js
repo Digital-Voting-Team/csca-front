@@ -1,4 +1,14 @@
-import { FetchWithTokenAsync } from "@/requestsBackend/staff";
+async function FetchWithTokenAsync(url, token) {
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  });
+  return await response.json();
+}
 
 async function GetPositionList(token) {
   let endpoint = process.env.VUE_APP_GET_POSITION;
@@ -20,8 +30,8 @@ async function DeletePositionById(token, id) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
-    }
+      Authorization: token,
+    },
   });
 
   return await response.json();
@@ -31,11 +41,13 @@ async function AddPosition(position, token) {
   let endpoint = process.env.VUE_APP_GET_POSITION;
 
   const body = {
-    type: "position",
-    attributes: {
-      name: position.name,
-      access_level: position.access_level
-    }
+    data: {
+      type: "position",
+      attributes: {
+        name: position.name,
+        access_level: position.access_level,
+      },
+    },
   };
 
   const response = await fetch(endpoint, {
@@ -43,9 +55,9 @@ async function AddPosition(position, token) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
+      Authorization: token,
     },
-    body: JSON.stringify(body, null, 2)
+    body: JSON.stringify(body, null, 2),
   });
 
   return response.json();
@@ -55,11 +67,13 @@ async function UpdatePositionById(position, token, id) {
   let endpoint = process.env.VUE_APP_GET_POSITION + "/" + id;
 
   const body = {
-    type: "position",
-    attributes: {
-      name: position.name,
-      access_level: position.access_level
-    }
+    data: {
+      type: "position",
+      attributes: {
+        name: position.name,
+        access_level: position.access_level,
+      },
+    },
   };
 
   const response = await fetch(endpoint, {
@@ -67,19 +81,18 @@ async function UpdatePositionById(position, token, id) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
+      Authorization: token,
     },
-    body: JSON.stringify(body, null, 2)
+    body: JSON.stringify(body, null, 2),
   });
 
   return response.json();
 }
 
 module.exports = {
-  FetchWithTokenAsync,
   GetPositionList,
   GetPositionById,
   DeletePositionById,
   AddPosition,
-  UpdatePositionById
+  UpdatePositionById,
 };

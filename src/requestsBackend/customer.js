@@ -1,4 +1,14 @@
-import { FetchWithTokenAsync } from "@/requestsBackend/staff";
+async function FetchWithTokenAsync(url, token) {
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  });
+  return await response.json();
+}
 
 async function GetCustomerList(token) {
   let endpoint = process.env.VUE_APP_GET_CUSTOMER;
@@ -20,8 +30,8 @@ async function DeleteCustomerById(token, id) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
-    }
+      Authorization: token,
+    },
   });
 
   return await response.json();
@@ -36,19 +46,19 @@ async function AddCustomer(customer, user_ref, token) {
       person: {
         data: {
           id: customer.person.id,
-          type: "person"
-        }
+          type: "person",
+        },
       },
       user: {
         data: {
           id: user_ref,
-          type: "user_ref"
-        }
-      }
+          type: "user_ref",
+        },
+      },
     },
     attributes: {
-      registration_date: customer.registration_date
-    }
+      registration_date: customer.registration_date,
+    },
   };
 
   const response = await fetch(endpoint, {
@@ -56,9 +66,9 @@ async function AddCustomer(customer, user_ref, token) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
+      Authorization: token,
     },
-    body: JSON.stringify(body, null, 2)
+    body: JSON.stringify(body, null, 2),
   });
 
   return response.json();
@@ -73,19 +83,19 @@ async function UpdateCustomerById(customer, user_ref, token, id) {
       person: {
         data: {
           id: customer.person.id,
-          type: "person"
-        }
+          type: "person",
+        },
       },
       user: {
         data: {
           id: user_ref,
-          type: "user_ref"
-        }
-      }
+          type: "user_ref",
+        },
+      },
     },
     attributes: {
-      registration_date: customer.registration_date
-    }
+      registration_date: customer.registration_date,
+    },
   };
 
   const response = await fetch(endpoint, {
@@ -93,19 +103,18 @@ async function UpdateCustomerById(customer, user_ref, token, id) {
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",
-      Authorization: token
+      Authorization: token,
     },
-    body: JSON.stringify(body, null, 2)
+    body: JSON.stringify(body, null, 2),
   });
 
   return response.json();
 }
 
 module.exports = {
-  FetchWithTokenAsync,
   GetCustomerList,
   GetCustomerById,
   DeleteCustomerById,
   AddCustomer,
-  UpdateCustomerById
+  UpdateCustomerById,
 };
