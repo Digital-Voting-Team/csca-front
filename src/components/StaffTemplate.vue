@@ -1,6 +1,6 @@
 <template>
   <h1>Staff list:</h1>
-  <div id="staff_list" v-for="staff in list" :key="staff.id">
+  <div id="staff_list" v-for="staff in staff_" :key="staff.id">
     <div class="single">
       <div class="info">
         <h3>{{ staff.name }}</h3>
@@ -18,26 +18,8 @@
 <!--    </router-link>-->
 
 <script>
-import { toRaw, watchEffect } from "vue";
-
 export default {
-  el: "#staff_list",
   props: ["staff_"],
-  setup(props) {
-    let list = [];
-
-    const updateList = (values) => {
-      list = values;
-    };
-
-    watchEffect(() => {
-      console.log(toRaw(props.staff_)[0]);
-      list = toRaw(props.staff_);
-      updateList(list);
-    });
-
-    return { list };
-  },
 };
 </script>
 

@@ -22,9 +22,9 @@ async function fetchAsync(url, body) {
     method: "POST",
     headers: {
       Accept: "*/*",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(body, null, 2)
+    body: JSON.stringify(body, null, 2),
   });
 
   return await response.json();
@@ -102,5 +102,5 @@ async function fullCustomerRegistration(
 
 module.exports = {
   authReq,
-  fetchAsync
+  fetchAsync,
 };
