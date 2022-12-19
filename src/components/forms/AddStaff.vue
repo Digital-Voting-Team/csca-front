@@ -26,8 +26,7 @@ import { AddPosition } from "@/requestsBackend/position";
 import { fullStaffRegistration } from "@/requestsBackend/auth";
 
 export default {
-  props: ["staff_"],
-  setup(props) {
+  setup() {
     const name = ref("");
     const salary = ref("");
     const username = ref("");
