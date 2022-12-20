@@ -21,9 +21,8 @@
 
 <script>
 import useLogin from "@/composables/useLogin";
-import { onMounted, onUnmounted, ref } from "vue";
+import { ref } from "vue";
 import { useAuthUserStore } from "@/stores/auth-user";
-import { addValidationListeners, removeValidationListeners } from "@/js/forms/validation"
 
 export default {
   setup() {
@@ -45,21 +44,7 @@ export default {
       }
     };
 
-    onMounted(function () {
-      addValidationListeners()
-    })
-
     return { error, login, isPending, handleSubmit, email, password }
   }
 }
 </script>
-
-<style>
-.form-container {
-  max-width: 500px;
-  margin: 0 auto;
-  background: #ccc;
-  border-radius: 10px;
-  padding: 15px 25px;
-}
-</style>

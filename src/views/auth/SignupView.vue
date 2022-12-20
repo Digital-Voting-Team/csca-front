@@ -26,9 +26,8 @@
 
 <script>
 import useSignup from "@/composables/useSignup";
-import { onMounted, onUnmounted, ref } from "vue";
+import { ref } from "vue";
 import { useAuthUserStore } from "@/stores/auth-user";
-import { addValidationListeners } from "@/js/forms/validation"
 
 export default {
   setup() {
@@ -48,10 +47,6 @@ export default {
         userStorage.isLoggedIn = true;
       }
     }
-
-    onMounted(function () {
-      addValidationListeners()
-    })
 
     return { error, signup, isPending, email, password, displayName, handleSubmit }
   }
