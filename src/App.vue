@@ -1,22 +1,20 @@
 <template>
   <Navbar />
-  <div class="content">
+  <main>
     <router-view />
-  </div>
+  </main>
+  <Footer />
 </template>
 
 <script>
 import Navbar from "./components/NavbarComponent.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
-  components: { Navbar },
+  components: { Navbar, Footer },
 };
 </script>
 
 <style>
-.content {
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 0 20px;
-}
+
 </style>
