@@ -71,9 +71,9 @@ async function fullStaffRegistration(
     const authResp = new AuthRecord(
       (await authReq("register", username, password)).data
     );
-    console.log(authResp);
+    // console.log(authResp);
     const staffResp = await AddStaff(staff, "0", authResp.user_id, token);
-    console.log(staffResp);
+    // console.log(staffResp);
     return new StaffRecord(staffResp.data);
   } catch (e) {
     console.log(e);

@@ -1,4 +1,4 @@
-import { AddressRecord } from "@/js/records/address.record";
+import {AddressRecord} from "@/js/records/address.record";
 
 export class CafeRecord {
   constructor(record, included) {
@@ -7,7 +7,7 @@ export class CafeRecord {
     if (included !== undefined) {
       for (const address of included) {
         if (record.relationships.address.data.id === address.id) {
-          this.address = new AddressRecord(address.data);
+          this.address = new AddressRecord(address);
           break;
         }
       }

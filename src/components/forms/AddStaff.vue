@@ -18,7 +18,7 @@ import { ref } from "vue";
 import { useAuthUserStore } from "@/stores/auth-user";
 import { AddStaff } from "@/requestsBackend/staff";
 import { StaffRecord } from "@/js/records/staff.record";
-import { AddAddress } from "@/requestsBackend/address";
+import { AddAddress } from "@/requestsBackend/staff_address";
 import { AddressRecord } from "@/js/records/address.record";
 import { PersonRecord } from "@/js/records/person.record";
 import { AddPerson } from "@/requestsBackend/person";

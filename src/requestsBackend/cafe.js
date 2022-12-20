@@ -1,5 +1,4 @@
 async function FetchWithTokenAsync(url, token) {
-  console.log(url, token)
   const response = await fetch(url, {
     method: "GET",
     headers: {
@@ -8,7 +7,6 @@ async function FetchWithTokenAsync(url, token) {
       Authorization: token,
     },
   });
-  console.log("Я здєсь")
   return await response.json();
 }
 
@@ -55,7 +53,7 @@ async function AddCafe(cafe, token) {
         },
       },
       attributes: {
-        name: cafe.cafe_name,
+        cafe_name: cafe.cafe_name,
       },
     },
   };
@@ -89,7 +87,7 @@ async function UpdateCafeById(cafe, token, id) {
         },
       },
       attributes: {
-        name: cafe.cafe_name,
+        cafe_name: cafe.cafe_name,
       },
     },
   };

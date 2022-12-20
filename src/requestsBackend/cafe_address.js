@@ -11,19 +11,19 @@ async function FetchWithTokenAsync(url, token) {
 }
 
 async function GetAddressList(token) {
-  let endpoint = process.env.VUE_APP_GET_ADDRESS;
+  let endpoint = process.env.VUE_APP_GET_CAFE_ADDRESS;
 
   return await FetchWithTokenAsync(endpoint, token);
 }
 
 async function GetAddressById(token, id) {
-  let endpoint = process.env.VUE_APP_GET_ADDRESS + "/" + id;
+  let endpoint = process.env.VUE_APP_GET_CAFE_ADDRESS + "/" + id;
 
   return await FetchWithTokenAsync(endpoint, token);
 }
 
 async function DeleteAddressById(token, id) {
-  let endpoint = process.env.VUE_APP_GET_ADDRESS + "/" + id;
+  let endpoint = process.env.VUE_APP_GET_CAFE_ADDRESS + "/" + id;
 
   const response = await fetch(endpoint, {
     method: "DELETE",
@@ -38,7 +38,7 @@ async function DeleteAddressById(token, id) {
 }
 
 async function AddAddress(address, token) {
-  let endpoint = process.env.VUE_APP_GET_ADDRESS;
+  let endpoint = process.env.VUE_APP_GET_CAFE_ADDRESS;
 
   const body = {
     data: {
@@ -67,7 +67,7 @@ async function AddAddress(address, token) {
 }
 
 async function UpdateAddressById(address, token, id) {
-  let endpoint = process.env.VUE_APP_GET_ADDRESS + "/" + id;
+  let endpoint = process.env.VUE_APP_GET_CAFE_ADDRESS + "/" + id;
 
   const body = {
     data: {

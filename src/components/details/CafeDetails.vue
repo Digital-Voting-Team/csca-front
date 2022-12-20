@@ -1,30 +1,16 @@
 <template>
   <h1 id="det_view">Detail View</h1>
   <div class="error" v-if="error">{{ error }}</div>
-  <div v-if="staff_item !== undefined" class="list-details">
+  <div v-if="cafe_item !== undefined" class="list-details">
     <div class="list-info">
       <div class="cover">
         <img src="@/assets/img.png" alt=""/>
       </div>
-      <h2>Name {{ staff_item.person.name }}</h2>
-      <p class="property">Phone: {{ staff_item.person.phone }}</p>
-      <p class="property">Email: {{ staff_item.person.email }}</p>
+      <h2>Name {{ cafe_item.cafe_name }}</h2>
     </div>
 
     <div class="staff-list">
-      <div class="single-staff">
-        <h3>Salary: {{ staff_item.salary }}</h3>
-      </div>
-      <div class="single-staff">
-        <p>Employment date: {{ staff_item.employment_date }}</p>
-      </div>
-      <div class="single-staff">
-        <p>Status: {{ staff_item.status }}</p>
-      </div>
-      <div class="single-staff">
-        <p>Position: {{ staff_item.position.name }}</p>
-      </div>
-      <button v-if="userStorage.position > 3" @click="handleDelete">
+      <button v-if="accessLevel > 3" @click="handleDelete">
         Delete
       </button>
     </div>
@@ -34,48 +20,47 @@
 <script>
 import {useRouter} from "vue-router";
 import {useAuthUserStore} from "@/stores/auth-user";
-import {DeleteStaffById, GetStaffById} from "@/requestsBackend/staff";
 import {ref} from "vue";
-import {StaffRecord} from "@/js/records/staff.record";
+import {DeleteCafeById, GetCafeById} from "@/requestsBackend/cafe";
+import {ErrorHandler} from "@/js/helpers/error-handler";
+import {CafeRecord} from "@/js/records/cafe.record";
 
 export default {
+  name: "CafeDetails",
   props: ["id"],
-  data() {
-    return {
-      staff_item: undefined,
-    };
-  },
   setup(props) {
     const router = useRouter();
     const userStorage = useAuthUserStore();
     const error = ref(false);
+    const cafe_item = ref(undefined);
+    const accessLevel = ref(null);
+
+    const load = async () => {
+      try {
+        let response = await GetCafeById(userStorage.token, props.id)
+
+        if (response !== undefined) {
+          cafe_item.value = new CafeRecord(response.data, response.included)
+        }
+      } catch (err) {
+        ErrorHandler.processWithoutFeedback(error)
+      }
+    }
+
+    load()
+    accessLevel.value = userStorage.position
 
     const handleDelete = async () => {
-      await DeleteStaffById(userStorage.token, props.id);
+      await DeleteCafeById(userStorage.token, props.id);
       await router.push({name: "Home"});
     };
 
-    return {error, handleDelete, userStorage};
-  },
-  async created() {
-    try {
-      await this.loadList(this.userStorage.token, this.$props.id);
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  methods: {
-    async loadList(token, id) {
-      // console.log(token);
-      const {data, included} = await GetStaffById(token, id);
-      // console.log(data);
-      this.staff_item = new StaffRecord(data, included);
-    },
-  },
-};
+    return {error, handleDelete, userStorage, cafe_item, accessLevel};
+  }
+}
 </script>
 
-<style>
+<style scoped>
 #det_view {
   margin-bottom: 20px;
 }
@@ -128,7 +113,7 @@ export default {
   text-align: left;
 }
 
-.single-staff {
+.single-cafe {
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
