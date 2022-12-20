@@ -4,11 +4,11 @@
       <h3 class="text-center">Login</h3>
       <div class="mb-3">
         <label class="form-label" for="email">Email address</label>
-        <input class="form-control" id="email" type="email" placeholder="Email" v-model="email" required/>
+        <input class="form-control" id="email" type="email" placeholder="Email" v-model="email" required />
       </div>
       <div class="mb-3">
         <label class="form-label" for="password">Password</label>
-        <input class="form-control" id="password" type="password" placeholder="Password" v-model="password" required/>
+        <input class="form-control" id="password" type="password" placeholder="Password" v-model="password" required />
       </div>
       <div class="mb-3" v-if="error">
         <div class="error alert alert-danger" role="alert"> {{ error }}</div>
@@ -21,13 +21,14 @@
 
 <script>
 import useLogin from "@/composables/useLogin";
-import {onMounted, ref} from "vue";
-import {useAuthUserStore} from "@/stores/auth-user";
+import { onMounted, onUnmounted, ref } from "vue";
+import { useAuthUserStore } from "@/stores/auth-user";
+import { addValidationListeners, removeValidationListeners } from "@/js/forms/validation"
 
 export default {
   setup() {
 
-    const {error, login, isPending} = useLogin();
+    const { error, login, isPending } = useLogin();
     const userStorage = useAuthUserStore();
 
     const email = ref("");
@@ -43,22 +44,12 @@ export default {
         userStorage.token = res.data.attributes.jwt;
       }
     };
+
     onMounted(function () {
-      const forms = document.querySelectorAll('.needs-validation')
-
-      Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-
-          form.classList.add('was-validated')
-        }, false)
-      })
+      addValidationListeners()
     })
 
-    return {error, login, isPending, handleSubmit, email, password}
+    return { error, login, isPending, handleSubmit, email, password }
   }
 }
 </script>
