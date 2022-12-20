@@ -11,32 +11,32 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: false, title: "Home" },
   },
   {
     path: "/login",
     name: "Login",
     component: Login,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: false, title: "Login" },
   },
   {
     path: "/signup",
     name: "Signup",
     component: Signup,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: false, title: "Sign Up" },
   },
   {
     path: "/staff",
     name: "StaffView",
     component: StaffView,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: false, title: "Staff" },
   },
   {
     path: "/staff/:id",
     name: "StaffDetails",
     component: StaffDetails,
     props: true,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, title: "Staff Details" },
   },
 ];
 
@@ -47,7 +47,8 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const store = useAuthUserStore();
-
+  document.title = "CSCA | " + to.meta.title
+  
   if (to.meta.requiresAuth && !store.isLoggedIn) return "/login";
 });
 
