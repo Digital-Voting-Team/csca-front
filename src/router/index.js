@@ -5,6 +5,7 @@ import Signup from "../views/auth/SignupView.vue";
 import { useAuthUserStore } from "@/stores/auth-user";
 import StaffView from "@/views/StaffView.vue";
 import StaffDetails from "@/components/details/StaffDetails.vue";
+import CafeView from "@/views/CafeView";
 
 const routes = [
   {
@@ -38,6 +39,19 @@ const routes = [
     props: true,
     meta: { requiresAuth: true },
   },
+  {
+    path: "/cafes",
+    name: "CafeView",
+    component: CafeView,
+    meta: { requiresAuth: false },
+  },
+  // {
+  //   path: "/cafes/:id",
+  //   name: "CafeDetails",
+  //   component: CafeDetails,
+  //   props: true,
+  //   meta: { requiresAuth: true },
+  // },
 ];
 
 const router = createRouter({

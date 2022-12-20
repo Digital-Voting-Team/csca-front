@@ -27,6 +27,8 @@ import { fullStaffRegistration } from "@/requestsBackend/auth";
 
 export default {
   setup() {
+    const addStaffRef = ref(null)
+
     const name = ref("");
     const salary = ref("");
     const username = ref("");
@@ -80,6 +82,7 @@ export default {
         username.value,
         password.value
       );
+      showForm.value = false;
     };
 
     return {
@@ -91,6 +94,7 @@ export default {
       isError,
       handleSubmit,
     };
+
   },
 };
 </script>
