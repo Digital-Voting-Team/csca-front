@@ -21,7 +21,7 @@ export default {
         chartData.value = {
             labels: Object.keys(dict),
             datasets: [{
-                label: "Number of order per staff member",
+                label: "Number of orders per staff member",
                 data: Object.values(dict),
                 backgroundColor: '#444',
             },
