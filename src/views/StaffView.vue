@@ -1,5 +1,5 @@
 <template>
-  <div class="some-component">
+  <div class="container">
     <template v-if="isLoaded">
       <template v-if="isLoadFailed">
         <p>Failed to load component</p>
