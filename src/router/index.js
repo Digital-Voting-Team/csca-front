@@ -7,6 +7,8 @@ import StaffView from "@/views/StaffView.vue";
 import StaffDetails from "@/components/details/StaffDetails.vue";
 import CafeView from "@/views/CafeView";
 import CafeDetails from "@/components/details/CafeDetails";
+import MealView from "@/views/MealView";
+import MealDetails from "@/components/details/MealDetails";
 
 const routes = [
   {
@@ -44,14 +46,27 @@ const routes = [
     path: "/cafes",
     name: "CafeView",
     component: CafeView,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: false, title: "Cafes" },
   },
   {
     path: "/cafes/:id",
     name: "CafeDetails",
     component: CafeDetails,
     props: true,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, title: "Cafe Details" },
+  },
+  {
+    path: "/meals",
+    name: "MealView",
+    component: MealView,
+    meta: { requiresAuth: false, title: "Meals" },
+  },
+  {
+    path: "/meals/:id",
+    name: "MealDetails",
+    component: MealDetails,
+    props: true,
+    meta: { requiresAuth: true, title: "Meal Details" },
   },
 ];
 

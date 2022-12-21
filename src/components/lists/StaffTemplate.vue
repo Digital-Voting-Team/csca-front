@@ -1,5 +1,4 @@
 <template>
-  <AddStaff v-if="accessLevel > 3" />
   <h2 class="text-center">Staff list:</h2>
 
   <div id="staff_list" v-for="staff in staff_" :key="staff.id">
@@ -21,16 +20,10 @@
 </template>
 
 <script>
-import AddStaff from "@/components/forms/AddStaff.vue";
-import { useAuthUserStore } from "@/stores/auth-user";
 
 export default {
   props: ["staff_"],
-  components: { AddStaff },
-  setup() {
-    const userStorage = useAuthUserStore();
-    const accessLevel = userStorage.position;
-    return { accessLevel };
+  setup(props) {
   },
 };
 </script>

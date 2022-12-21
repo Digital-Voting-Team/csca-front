@@ -6,10 +6,13 @@
       <div class="cover">
         <img src="@/assets/img.png" alt=""/>
       </div>
-      <h2>Name {{ cafe_item.cafe_name }}</h2>
+      <h2>{{ cafe_item.cafe_name }}</h2>
     </div>
 
     <div class="staff-list">
+        <div class="single-cafe">
+            <p>Rating: {{ cafe_item.rating }}</p>
+        </div>
       <button v-if="accessLevel > 3" @click="handleDelete">
         Delete
       </button>
@@ -52,7 +55,7 @@ export default {
 
     const handleDelete = async () => {
       await DeleteCafeById(userStorage.token, props.id);
-      await router.push({name: "Home"});
+      await router.push({name: "CafeView"});
     };
 
     return {error, handleDelete, userStorage, cafe_item, accessLevel};

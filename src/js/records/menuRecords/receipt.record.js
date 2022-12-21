@@ -8,7 +8,7 @@ export class ReceiptRecord {
     if (included !== undefined) {
       for (const meal of included) {
         if (record.relationships.meal.data.id === meal.id) {
-          this.meal = new MealRecord(meal.data);
+          this.meal = new MealRecord(meal);
           break;
         }
       }
