@@ -34,28 +34,29 @@
             <router-link class="nav-link" :to="{ name: 'Home' }">
               Home
             </router-link>
+          </li>
+          <li class="nav-item">
             <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'OrderView' }"> View
               orders
             </router-link>
+          </li>
+          <li class="nav-item">
             <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'StaffEffectiveness' }">
               Staff effectiveness
             </router-link>
           </li>
           <li class="nav-item dropdown" v-if="userStorage?.isLoggedIn === true">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-              aria-expanded="false">Dropdown</a>
+              aria-expanded="false">Views</a>
             <ul class="dropdown-menu">
               <li> <router-link class="dropdown-item" :to="{ name: 'StaffView' }">
-                  View
-                  staff
+                  Staff
                 </router-link></li>
               <li> <router-link class="dropdown-item" :to="{ name: 'CafeView' }">
-                  View
-                  cafes
+                  Cafes
                 </router-link></li>
               <li> <router-link class="dropdown-item" :to="{ name: 'MealView' }">
-                  View
-                  meals
+                  Meals
                 </router-link></li>
             </ul>
           </li>
