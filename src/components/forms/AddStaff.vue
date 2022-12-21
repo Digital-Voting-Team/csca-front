@@ -1,6 +1,6 @@
 <template>
   <div class="add-item">
-    <button v-if="!showForm" @click="showForm = true">Add Staff</button>
+    <button class="btn btn-primary" v-if="!showForm" @click="showForm = true">Add Staff</button>
     <form v-if="showForm" @submit.prevent="handleSubmit">
       <h4>Add a New Staff member</h4>
       <input type="text" placeholder="Name" required v-model="name" />
@@ -20,6 +20,7 @@ import { AddAddress } from "@/requestsBackend/staffRequests/staff_address";
 import { AddPerson } from "@/requestsBackend/person";
 import { AddPosition } from "@/requestsBackend/staffRequests/position";
 import { fullStaffRegistration } from "@/requestsBackend/auth";
+
 
 export default {
   setup() {

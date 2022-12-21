@@ -8,6 +8,7 @@ import 'bootstrap';
 
 // styles
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@/assets/main.css'
 
 const pinia = createPinia();
 const app = createApp(App);
