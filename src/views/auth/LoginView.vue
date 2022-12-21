@@ -23,6 +23,7 @@
 import useLogin from "@/composables/useLogin";
 import { ref } from "vue";
 import { useAuthUserStore } from "@/stores/auth-user";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
@@ -32,6 +33,7 @@ export default {
 
     const email = ref("");
     const password = ref("");
+    const router = useRouter()
 
     const handleSubmit = async () => {
       const res = await login(email.value, password.value);
@@ -41,6 +43,7 @@ export default {
         userStorage.displayName = "Some name";
         userStorage.isLoggedIn = true;
         userStorage.token = res.data.attributes.jwt;
+        router.push({ name: "Home" })
       }
     };
 
