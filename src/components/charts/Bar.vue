@@ -11,23 +11,21 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
     name: 'BarChart',
+    props: ['dict'],
     components: { Bar },
-    setup() {
+    setup(props) {
         const chartData = ref('')
         const chartOptions = ref('')
+        const dict = props.dict
 
         chartData.value = {
-            labels: ['January', 'February', 'March'],
+            labels: Object.keys(dict),
             datasets: [{
-                label: "First",
-                data: [40, 20, 12],
+                label: "Number of order per staff member",
+                data: Object.values(dict),
                 backgroundColor: '#444',
             },
-            {
-                label: "Second",
-                data: [4, 22, 32],
-                backgroundColor: '#ccc'
-            }],
+            ]
         }
 
         chartOptions.value = {

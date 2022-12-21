@@ -1,5 +1,7 @@
 <template>
-  <div v-if="staff.length && orders.length">{{ GetDataDict(staff, orders) }}</div>
+    <div v-if="staff.length && orders.length">
+      <BarChart :dict="GetDataDict(staff, orders)"/>
+    </div>
 </template>
 
 <script>
@@ -11,9 +13,11 @@ import {ErrorHandler} from "@/js/helpers/error-handler";
 import {GetStaffList} from "@/requestsBackend/staffRequests/staff";
 import {StaffRecord} from "@/js/records/staffRecords/staff.record";
 import GetDataDict from "@/requestsBackend/analyticalRequests/staffEffectiveness";
+import BarChart from "@/components/charts/Bar";
 
 export default {
   name: "StaffEffectiveness",
+  components: {BarChart},
   setup() {
     const userStorage = useAuthUserStore()
     const orders = ref([])
