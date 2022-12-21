@@ -1,7 +1,7 @@
 <template>
   <div class="form-container mt-3">
     <form class="needs-validation" @submit.prevent="handleSubmit">
-      <h3 class="text-center">Sign up</h3>
+      <h3 class="text-center">Signup</h3>
       <div class="mb-3">
         <label class="form-label" for="displayName">Display name</label>
         <input class="form-control" id="displayName" type="text" placeholder="Display name" v-model="displayName"
@@ -18,7 +18,7 @@
       <div class="mb-3" v-if="error">
         <div class="error alert alert-danger" role="alert"> {{ error }}</div>
       </div>
-      <button class="btn btn-primary" v-if="!isPending">Sign up</button>
+      <button class="btn btn-primary" v-if="!isPending">Signup</button>
       <button class="btn btn-primary" v-if="isPending" disabled>Loading</button>
     </form>
   </div>

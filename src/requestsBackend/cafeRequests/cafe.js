@@ -54,6 +54,7 @@ async function AddCafe(cafe, token) {
       },
       attributes: {
         cafe_name: cafe.cafe_name,
+        rating: cafe.rating,
       },
     },
   };
@@ -88,6 +89,7 @@ async function UpdateCafeById(cafe, token, id) {
       },
       attributes: {
         cafe_name: cafe.cafe_name,
+        rating: cafe.rating,
       },
     },
   };

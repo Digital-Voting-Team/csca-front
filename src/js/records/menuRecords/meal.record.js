@@ -9,7 +9,7 @@ export class MealRecord {
     if (included !== undefined) {
       for (const cat of included) {
         if (record.relationships.category.data.id === cat.id) {
-          this.category = new CategoryRecord(cat.data);
+          this.category = new CategoryRecord(cat, undefined);
           break;
         }
       }

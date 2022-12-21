@@ -11,7 +11,7 @@ async function FetchWithTokenAsync(url, token) {
 }
 
 async function GetMealList(token) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MEAL;
+  let endpoint = process.env.VUE_APP_GET_MENU_MEAL;
 
   return await FetchWithTokenAsync(endpoint, token);
 }
