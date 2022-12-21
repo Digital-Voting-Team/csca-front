@@ -40,7 +40,7 @@ export default {
 
       if (!error.value) {
         userStorage.setUsername(email.value);
-        userStorage.displayName = "Some name";
+        userStorage.displayName = email.value;
         userStorage.isLoggedIn = true;
         userStorage.token = res.data.attributes.jwt;
         router.push({ name: "Home" })

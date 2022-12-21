@@ -13,7 +13,7 @@ export class OrderRecord {
     if (included !== undefined) {
       for (const stat of included) {
         if (record.relationships.status.data.id === stat.id) {
-          this.category = new StatusRecord(stat);
+          this.status = new StatusRecord(stat);
           break;
         }
       }

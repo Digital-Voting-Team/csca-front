@@ -44,6 +44,9 @@
             <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'MealView' }"> View
               meals
             </router-link>
+            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'OrderView' }"> View
+              orders
+            </router-link>
           </li>
 
           <li class="d-lg-flex d-none d-lg-block" v-if="userStorage?.isLoggedIn === true">
