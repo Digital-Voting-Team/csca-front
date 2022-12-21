@@ -47,6 +47,9 @@
             <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'OrderView' }"> View
               orders
             </router-link>
+            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'StaffEffectiveness' }">
+              Staff effectiveness
+            </router-link>
           </li>
 
           <li class="d-lg-flex d-none d-lg-block" v-if="userStorage?.isLoggedIn === true">
