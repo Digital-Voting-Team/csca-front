@@ -10,8 +10,11 @@
     </div>
 
     <div class="staff-list">
-        <div class="single-cafe">
+        <div v-if="cafe_item.rating" class="single-cafe">
             <p>Rating: {{ cafe_item.rating }}</p>
+        </div>
+        <div v-else class="single-cafe">
+            <p>Rating: 0</p>
         </div>
       <button v-if="accessLevel > 3" @click="handleDelete">
         Delete

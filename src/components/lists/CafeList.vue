@@ -11,6 +11,12 @@
         <h3 class="card-header">
           {{ cafe.cafe_name || "Name" }}
         </h3>
+        <div v-if="cafe.rating" class="card-body d-flex justify-content-between">
+          <p>Rating: {{ cafe.rating || "rating" }}</p>
+        </div>
+        <div v-else class="card-body d-flex justify-content-between">
+          <p>Rating: 0</p>
+        </div>
       </div>
     </router-link>
   </div>
