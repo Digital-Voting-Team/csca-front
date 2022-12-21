@@ -6,10 +6,12 @@ export class OrderItemRecord {
     this.meal_id = record.relationships.meal.data.id;
     this.quantity = record.attributes.quantity;
     if (included !== undefined) {
-      for (const ord of included) {
-        if (record.relationships.order.data.id === ord.id) {
-          this.order = new OrderRecord(ord, undefined);
-          break;
+      for (const item of included) {
+        if (
+          record.relationships.order.data.id === item.id &&
+          item.type === "order"
+        ) {
+          this.order = new OrderRecord(item, undefined);
         }
       }
     }

@@ -12,6 +12,8 @@ import MealDetails from "@/components/details/MealDetails";
 import OrderView from "@/views/OrderView";
 import OrderDetails from "@/components/details/OrderDetails";
 import StaffEffectiveness from "@/views/analyticalViews/StaffEffectiveness";
+import MealPopularity from "@/views/analyticalViews/MealPopularity";
+import DeliveryCount from "@/views/analyticalViews/DeliveryCount";
 
 const routes = [
   {
@@ -90,6 +92,20 @@ const routes = [
     component: StaffEffectiveness,
     props: true,
     meta: { requiresAuth: true, title: "Staff effectiveness" },
+  },
+  {
+    path: "/meal_popularity",
+    name: "MealPopularity",
+    component: MealPopularity,
+    props: true,
+    meta: { requiresAuth: true, title: "Meal popularity" },
+  },
+  {
+    path: "/delivery_count",
+    name: "DeliveryCount",
+    component: DeliveryCount,
+    props: true,
+    meta: { requiresAuth: true, title: "Delivery count" },
   },
 ];
 
