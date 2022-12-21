@@ -10,20 +10,20 @@ async function FetchWithTokenAsync(url, token) {
   return await response.json();
 }
 
-async function GetAddressList(token) {
-  let endpoint = process.env.VUE_APP_GET_ADDRESS;
+async function GetCafeList(token) {
+  let endpoint = process.env.VUE_APP_GET_CAFE;
 
   return await FetchWithTokenAsync(endpoint, token);
 }
 
-async function GetAddressById(token, id) {
-  let endpoint = process.env.VUE_APP_GET_ADDRESS + "/" + id;
+async function GetCafeById(token, id) {
+  let endpoint = process.env.VUE_APP_GET_CAFE + "/" + id;
 
   return await FetchWithTokenAsync(endpoint, token);
 }
 
-async function DeleteAddressById(token, id) {
-  let endpoint = process.env.VUE_APP_GET_ADDRESS + "/" + id;
+async function DeleteCafeById(token, id) {
+  let endpoint = process.env.VUE_APP_GET_CAFE + "/" + id;
 
   const response = await fetch(endpoint, {
     method: "DELETE",
@@ -37,18 +37,23 @@ async function DeleteAddressById(token, id) {
   return await response.json();
 }
 
-async function AddAddress(address, token) {
-  let endpoint = process.env.VUE_APP_GET_ADDRESS;
+async function AddCafe(cafe, token) {
+  let endpoint = process.env.VUE_APP_GET_CAFE;
 
   const body = {
     data: {
+      id: "1",
+      type: "cafe",
+      relationships: {
+        address: {
+          data: {
+            id: cafe.address.id,
+            type: "address",
+          },
+        },
+      },
       attributes: {
-        building_number: address.building_number,
-        street: address.street,
-        city: address.city,
-        district: address.district,
-        region: address.region,
-        postal_code: address.postal_code,
+        cafe_name: cafe.cafe_name,
       },
     },
   };
@@ -66,18 +71,23 @@ async function AddAddress(address, token) {
   return response.json();
 }
 
-async function UpdateAddressById(address, token, id) {
-  let endpoint = process.env.VUE_APP_GET_ADDRESS + "/" + id;
+async function UpdateCafeById(cafe, token, id) {
+  let endpoint = process.env.VUE_APP_GET_CAFE + "/" + id;
 
   const body = {
     data: {
+      id: "1",
+      type: "cafe",
+      relationships: {
+        address: {
+          data: {
+            id: cafe.address.id,
+            type: "address",
+          },
+        },
+      },
       attributes: {
-        building_number: address.building_number,
-        street: address.street,
-        city: address.city,
-        district: address.district,
-        region: address.region,
-        postal_code: address.postal_code,
+        cafe_name: cafe.cafe_name,
       },
     },
   };
@@ -96,9 +106,9 @@ async function UpdateAddressById(address, token, id) {
 }
 
 module.exports = {
-  GetAddressList,
-  GetAddressById,
-  DeleteAddressById,
-  AddAddress,
-  UpdateAddressById,
+  GetCafeList,
+  GetCafeById,
+  DeleteCafeById,
+  AddCafe,
+  UpdateCafeById,
 };

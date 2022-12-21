@@ -16,18 +16,16 @@
 <script>
 import { ref } from "vue";
 import { useAuthUserStore } from "@/stores/auth-user";
-import { AddStaff } from "@/requestsBackend/staff";
-import { StaffRecord } from "@/js/records/staff.record";
-import { AddAddress } from "@/requestsBackend/address";
-import { AddressRecord } from "@/js/records/address.record";
-import { PersonRecord } from "@/js/records/person.record";
+import { AddAddress } from "@/requestsBackend/staffRequests/staff_address";
 import { AddPerson } from "@/requestsBackend/person";
-import { AddPosition } from "@/requestsBackend/position";
+import { AddPosition } from "@/requestsBackend/staffRequests/position";
 import { fullStaffRegistration } from "@/requestsBackend/auth";
 
 
 export default {
   setup() {
+    const addStaffRef = ref(null)
+
     const name = ref("");
     const salary = ref("");
     const username = ref("");
@@ -81,6 +79,7 @@ export default {
         username.value,
         password.value
       );
+      showForm.value = false;
     };
 
     return {
@@ -92,6 +91,7 @@ export default {
       isError,
       handleSubmit,
     };
+
   },
 };
 </script>
