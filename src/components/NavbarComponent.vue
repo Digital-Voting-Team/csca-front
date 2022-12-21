@@ -2,7 +2,7 @@
   <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
     <div class="container">
       <router-link :to="{ name: 'Home' }" class="navbar-brand">
-        <img class="nav-logo mr-3" src="@/assets/csca_logo.png" alt="Logo" />
+        <img class="nav-logo mr-3" src="@/assets/csca_logo.png" alt="Logo"/>
 
         <span class="d-none d-sm-inline">CSCA</span>
       </router-link>
@@ -22,7 +22,7 @@
         </ul>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
@@ -45,19 +45,35 @@
               Staff effectiveness
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'MealPopularity' }">
+              Meal popularity
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'DeliveryCount' }">
+              Delivery count
+            </router-link>
+          </li>
           <li class="nav-item dropdown" v-if="userStorage?.isLoggedIn === true">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-              aria-expanded="false">Views</a>
+               aria-expanded="false">Views</a>
             <ul class="dropdown-menu">
-              <li> <router-link class="dropdown-item" :to="{ name: 'StaffView' }">
+              <li>
+                <router-link class="dropdown-item" :to="{ name: 'StaffView' }">
                   Staff
-                </router-link></li>
-              <li> <router-link class="dropdown-item" :to="{ name: 'CafeView' }">
+                </router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item" :to="{ name: 'CafeView' }">
                   Cafes
-                </router-link></li>
-              <li> <router-link class="dropdown-item" :to="{ name: 'MealView' }">
+                </router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item" :to="{ name: 'MealView' }">
                   Meals
-                </router-link></li>
+                </router-link>
+              </li>
             </ul>
           </li>
         </ul>
@@ -79,22 +95,22 @@
 
 <script>
 import useLogout from "../composables/useLogout";
-import { useRouter } from "vue-router";
-import { useAuthUserStore } from "@/stores/auth-user";
+import {useRouter} from "vue-router";
+import {useAuthUserStore} from "@/stores/auth-user";
 
 export default {
   setup() {
     const userStorage = useAuthUserStore();
-    const { logout } = useLogout();
+    const {logout} = useLogout();
     const router = useRouter();
 
     const handleClick = async () => {
       await logout(userStorage.username);
       userStorage.isLoggedIn = false;
-      router.push({ name: "Login" });
+      router.push({name: "Login"});
     };
     userStorage.isLoggedIn = false
-    return { userStorage, logout, handleClick, router };
+    return {userStorage, logout, handleClick, router};
   },
 };
 </script>

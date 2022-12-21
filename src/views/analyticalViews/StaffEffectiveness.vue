@@ -1,6 +1,10 @@
 <template>
+    <h2>Effectiveness of staff members</h2>
     <div v-if="staff.length && orders.length">
       <BarChart :dict="GetDataDict(staff, orders)"/>
+    </div>
+    <div v-else>
+        <loader/>
     </div>
 </template>
 
@@ -14,10 +18,11 @@ import {GetStaffList} from "@/requestsBackend/staffRequests/staff";
 import {StaffRecord} from "@/js/records/staffRecords/staff.record";
 import GetDataDict from "@/requestsBackend/analyticalRequests/staffEffectiveness";
 import BarChart from "@/components/charts/Bar";
+import Loader from "@/vue/common/Loader";
 
 export default {
   name: "StaffEffectiveness",
-  components: {BarChart},
+  components: {BarChart, Loader},
   setup() {
     const userStorage = useAuthUserStore()
     const orders = ref([])
