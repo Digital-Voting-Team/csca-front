@@ -1,7 +1,11 @@
 function GetDataDict(staffList, orderList) {
   let dict = {};
   for (let i = 0; i < orderList.length; i++){
-    let key = GetStaffNameById(staffList, orderList[i].staff_id);
+    let id = orderList[i].staff_id
+    if (id <= 0){
+      continue;
+    }
+    let key = GetStaffNameById(staffList, id);
     if (!(key in dict)){
       dict[key] = 0;
     }
