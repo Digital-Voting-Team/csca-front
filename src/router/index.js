@@ -9,6 +9,9 @@ import CafeView from "@/views/CafeView";
 import CafeDetails from "@/components/details/CafeDetails";
 import MealView from "@/views/MealView";
 import MealDetails from "@/components/details/MealDetails";
+import OrderView from "@/views/OrderView";
+import OrderDetails from "@/components/details/OrderDetails";
+import StaffEffectiveness from "@/views/analyticalViews/StaffEffectiveness";
 
 const routes = [
   {
@@ -67,6 +70,26 @@ const routes = [
     component: MealDetails,
     props: true,
     meta: { requiresAuth: true, title: "Meal Details" },
+  },
+  {
+    path: "/orders",
+    name: "OrderView",
+    component: OrderView,
+    meta: { requiresAuth: false, title: "Orders" },
+  },
+  {
+    path: "/orders/:id",
+    name: "OrderDetails",
+    component: OrderDetails,
+    props: true,
+    meta: { requiresAuth: true, title: "Order Details" },
+  },
+  {
+    path: "/effectiveness",
+    name: "StaffEffectiveness",
+    component: StaffEffectiveness,
+    props: true,
+    meta: { requiresAuth: true, title: "Staff effectiveness" },
   },
 ];
 

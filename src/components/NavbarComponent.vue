@@ -34,6 +34,12 @@
             <router-link class="nav-link" :to="{ name: 'Home' }">
               Home
             </router-link>
+            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'OrderView' }"> View
+              orders
+            </router-link>
+            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'StaffEffectiveness' }">
+              Staff effectiveness
+            </router-link>
           </li>
           <li class="nav-item dropdown" v-if="userStorage?.isLoggedIn === true">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"

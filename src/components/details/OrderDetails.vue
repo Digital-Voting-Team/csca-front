@@ -1,21 +1,36 @@
 <template>
   <h1 id="det_view">Detail View</h1>
   <div class="error" v-if="error">{{ error }}</div>
-  <div v-if="cafe_item !== undefined" class="list-details">
+  <div v-if="order_item !== undefined" class="list-details">
     <div class="list-info">
       <div class="cover">
         <img src="@/assets/img.png" alt=""/>
       </div>
-      <h2>{{ cafe_item.cafe_name }}</h2>
+      <h2>Total price: {{ order_item.total_price }}</h2>
     </div>
 
-    <div class="staff-list">
-        <div v-if="cafe_item.rating" class="single-cafe">
-            <p>Rating: {{ cafe_item.rating }}</p>
-        </div>
-        <div v-else class="single-cafe">
-            <p>Rating: 0</p>
-        </div>
+    <div class="order-list">
+      <div class="single-order">
+        <h4>Status: {{ order_item.status.status_name }}</h4>
+      </div>
+      <div class="single-order">
+        <p>Customer ID: {{ order_item.customer_id }}</p>
+      </div>
+      <div class="single-order">
+        <p>Staff ID: {{ order_item.staff_id }}</p>
+      </div>
+      <div class="single-order">
+        <p>Cafe ID: {{ order_item.cafe_id }}</p>
+      </div>
+      <div class="single-order">
+        <p>Payment method: {{ order_item.payment_method }}</p>
+      </div>
+      <div class="single-order">
+        <p>Is take away: {{ order_item.is_take_away }}</p>
+      </div>
+      <div class="single-order">
+        <p>Order date: {{ order_item.order_date }}</p>
+      </div>
       <button v-if="accessLevel > 3" @click="handleDelete">
         Delete
       </button>
@@ -27,26 +42,26 @@
 import {useRouter} from "vue-router";
 import {useAuthUserStore} from "@/stores/auth-user";
 import {ref} from "vue";
-import {DeleteCafeById, GetCafeById} from "@/requestsBackend/cafeRequests/cafe";
+import {DeleteOrderById, GetOrderById} from "@/requestsBackend/orderRequests/order";
 import {ErrorHandler} from "@/js/helpers/error-handler";
-import {CafeRecord} from "@/js/records/cafeRecords/cafe.record";
+import {OrderRecord} from "@/js/records/orderRecords/order.record";
 
 export default {
-  name: "CafeDetails",
+  name: "OrderDetails",
   props: ["id"],
   setup(props) {
     const router = useRouter();
     const userStorage = useAuthUserStore();
     const error = ref(false);
-    const cafe_item = ref(undefined);
+    const order_item = ref(undefined);
     const accessLevel = ref(null);
 
     const load = async () => {
       try {
-        let response = await GetCafeById(userStorage.token, props.id)
+        let response = await GetOrderById(userStorage.token, props.id)
 
         if (response !== undefined) {
-          cafe_item.value = new CafeRecord(response.data, response.included)
+          order_item.value = new OrderRecord(response.data, response.included)
         }
       } catch (err) {
         ErrorHandler.processWithoutFeedback(error)
@@ -57,11 +72,11 @@ export default {
     accessLevel.value = userStorage.position
 
     const handleDelete = async () => {
-      await DeleteCafeById(userStorage.token, props.id);
-      await router.push({name: "CafeView"});
+      await DeleteOrderById(userStorage.token, props.id);
+      await router.push({name: "OrderView"});
     };
 
-    return {error, handleDelete, userStorage, cafe_item, accessLevel};
+    return {error, handleDelete, userStorage, order_item, accessLevel};
   }
 }
 </script>
@@ -119,7 +134,7 @@ export default {
   text-align: left;
 }
 
-.single-cafe {
+.single-order {
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
