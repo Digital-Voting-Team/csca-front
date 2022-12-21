@@ -94,15 +94,4 @@ export default {
 
   },
 };
-</script>
-
-<style scoped>
-.add-item {
-  text-align: center;
-  margin-top: 40px;
-}
-form {
-  max-width: 100%;
-  text-align: left;
-}
-</style>
+</script> 
