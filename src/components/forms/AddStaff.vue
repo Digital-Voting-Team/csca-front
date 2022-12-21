@@ -16,9 +16,9 @@
 <script>
 import { ref } from "vue";
 import { useAuthUserStore } from "@/stores/auth-user";
-import { AddAddress } from "@/requestsBackend/staff_address";
+import { AddAddress } from "@/requestsBackend/staffRequests/staff_address";
 import { AddPerson } from "@/requestsBackend/person";
-import { AddPosition } from "@/requestsBackend/position";
+import { AddPosition } from "@/requestsBackend/staffRequests/position";
 import { fullStaffRegistration } from "@/requestsBackend/auth";
 
 export default {

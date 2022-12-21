@@ -25,9 +25,9 @@ import CafeList from "@/components/lists/CafeList";
 import Loader from "@/vue/common/Loader";
 import {ref} from "vue";
 import {useAuthUserStore} from "@/stores/auth-user";
-import {GetCafeList} from "@/requestsBackend/cafe";
+import {GetCafeList} from "@/requestsBackend/cafeRequests/cafe";
 import {ErrorHandler} from "@/js/helpers/error-handler";
-import {CafeRecord} from "@/js/records/cafe.record";
+import {CafeRecord} from "@/js/records/cafeRecords/cafe.record";
 import AddCafe from "@/components/forms/AddCafe";
 
 export default {

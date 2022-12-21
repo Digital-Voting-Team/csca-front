@@ -13,8 +13,8 @@
 <script>
 import { ref } from "vue";
 import { useAuthUserStore } from "@/stores/auth-user";
-import { AddAddress } from "@/requestsBackend/cafe_address";
-import {AddCafe} from "@/requestsBackend/cafe";
+import { AddAddress } from "@/requestsBackend/cafeRequests/cafe_address";
+import {AddCafe} from "@/requestsBackend/cafeRequests/cafe";
 
 export default {
     setup() {

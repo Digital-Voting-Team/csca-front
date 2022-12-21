@@ -34,9 +34,9 @@
 <script>
 import {useRouter} from "vue-router";
 import {useAuthUserStore} from "@/stores/auth-user";
-import {DeleteStaffById, GetStaffById} from "@/requestsBackend/staff";
+import {DeleteStaffById, GetStaffById} from "@/requestsBackend/staffRequests/staff";
 import {ref} from "vue";
-import {StaffRecord} from "@/js/records/staff.record";
+import {StaffRecord} from "@/js/records/staffRecords/staff.record";
 
 export default {
   props: ["id"],

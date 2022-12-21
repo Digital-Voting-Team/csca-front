@@ -32,8 +32,8 @@ import CollectionLoader from "@/vue/common/CollectionLoader";
 import {ErrorHandler} from "@/js/helpers/error-handler";
 
 import {useAuthUserStore} from "@/stores/auth-user";
-import {GetStaffList} from "@/requestsBackend/staff";
-import {StaffRecord} from "@/js/records/staff.record";
+import {GetStaffList} from "@/requestsBackend/staffRequests/staff";
+import {StaffRecord} from "@/js/records/staffRecords/staff.record";
 import StaffTemplate from "@/components/lists/StaffTemplate.vue";
 import AddStaff from "@/components/forms/AddStaff";
 

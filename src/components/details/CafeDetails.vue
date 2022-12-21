@@ -21,9 +21,9 @@
 import {useRouter} from "vue-router";
 import {useAuthUserStore} from "@/stores/auth-user";
 import {ref} from "vue";
-import {DeleteCafeById, GetCafeById} from "@/requestsBackend/cafe";
+import {DeleteCafeById, GetCafeById} from "@/requestsBackend/cafeRequests/cafe";
 import {ErrorHandler} from "@/js/helpers/error-handler";
-import {CafeRecord} from "@/js/records/cafe.record";
+import {CafeRecord} from "@/js/records/cafeRecords/cafe.record";
 
 export default {
   name: "CafeDetails",

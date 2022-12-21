@@ -12,10 +12,10 @@
 // }
 
 const { AuthRecord } = require("@/js/records/auth.record");
-const { AddStaff } = require("@/requestsBackend/staff");
-const { StaffRecord } = require("@/js/records/staff.record");
-const { CustomerRecord } = require("@/js/records/customer.record");
-const { AddCustomer } = require("@/requestsBackend/customer");
+const { AddStaff } = require("@/requestsBackend/staffRequests/staff");
+const { StaffRecord } = require("@/js/records/staffRecords/staff.record");
+const { CustomerRecord } = require("@/js/records/customerRecords/customer.record");
+const { AddCustomer } = require("@/requestsBackend/customerRequests/customer");
 
 async function fetchAsync(url, body) {
   const response = await fetch(url, {
