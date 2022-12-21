@@ -10,20 +10,20 @@ async function FetchWithTokenAsync(url, token) {
   return await response.json();
 }
 
-async function GetMealMenuList(token) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MENU;
+async function GetAddressList(token) {
+  let endpoint = process.env.VUE_APP_GET_ORDER_ADDRESS;
 
   return await FetchWithTokenAsync(endpoint, token);
 }
 
-async function GetMealMenuById(token, id) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MENU + "/" + id;
+async function GetAddressById(token, id) {
+  let endpoint = process.env.VUE_APP_GET_ORDER_ADDRESS + "/" + id;
 
   return await FetchWithTokenAsync(endpoint, token);
 }
 
-async function DeleteMealMenuById(token, id) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MENU + "/" + id;
+async function DeleteAddressById(token, id) {
+  let endpoint = process.env.VUE_APP_GET_ORDER_ADDRESS + "/" + id;
 
   const response = await fetch(endpoint, {
     method: "DELETE",
@@ -37,25 +37,18 @@ async function DeleteMealMenuById(token, id) {
   return await response.json();
 }
 
-async function AddMealMenu(receipt, token) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MENU;
+async function AddAddress(address, token) {
+  let endpoint = process.env.VUE_APP_GET_ORDER_ADDRESS;
 
   const body = {
     data: {
-      type: "meal_menu",
-      relationships: {
-        meal: {
-          data: {
-            id: receipt.meal.id,
-            type: "meal",
-          },
-        },
-        ingredient: {
-          data: {
-            id: receipt.menu.id,
-            type: "menu",
-          },
-        },
+      attributes: {
+        building_number: address.building_number,
+        street: address.street,
+        city: address.city,
+        district: address.district,
+        region: address.region,
+        postal_code: address.postal_code,
       },
     },
   };
@@ -73,25 +66,18 @@ async function AddMealMenu(receipt, token) {
   return response.json();
 }
 
-async function UpdateMealMenuById(receipt, token, id) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MENU + "/" + id;
+async function UpdateAddressById(address, token, id) {
+  let endpoint = process.env.VUE_APP_GET_ORDER_ADDRESS + "/" + id;
 
   const body = {
     data: {
-      type: "meal_menu",
-      relationships: {
-        meal: {
-          data: {
-            id: receipt.meal.id,
-            type: "meal",
-          },
-        },
-        ingredient: {
-          data: {
-            id: receipt.menu.id,
-            type: "menu",
-          },
-        },
+      attributes: {
+        building_number: address.building_number,
+        street: address.street,
+        city: address.city,
+        district: address.district,
+        region: address.region,
+        postal_code: address.postal_code,
       },
     },
   };
@@ -110,9 +96,9 @@ async function UpdateMealMenuById(receipt, token, id) {
 }
 
 module.exports = {
-  GetMealMenuList,
-  GetMealMenuById,
-  DeleteMealMenuById,
-  AddMealMenu,
-  UpdateMealMenuById,
+  GetAddressList,
+  GetAddressById,
+  DeleteAddressById,
+  AddAddress,
+  UpdateAddressById,
 };

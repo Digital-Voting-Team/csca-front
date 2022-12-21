@@ -10,20 +10,20 @@ async function FetchWithTokenAsync(url, token) {
   return await response.json();
 }
 
-async function GetMealMenuList(token) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MENU;
+async function GetStatusList(token) {
+  let endpoint = process.env.VUE_APP_GET_ORDER_STATUS;
 
   return await FetchWithTokenAsync(endpoint, token);
 }
 
-async function GetMealMenuById(token, id) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MENU + "/" + id;
+async function GetStatusById(token, id) {
+  let endpoint = process.env.VUE_APP_GET_ORDER_STATUS + "/" + id;
 
   return await FetchWithTokenAsync(endpoint, token);
 }
 
-async function DeleteMealMenuById(token, id) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MENU + "/" + id;
+async function DeleteStatusById(token, id) {
+  let endpoint = process.env.VUE_APP_GET_ORDER_STATUS + "/" + id;
 
   const response = await fetch(endpoint, {
     method: "DELETE",
@@ -37,25 +37,13 @@ async function DeleteMealMenuById(token, id) {
   return await response.json();
 }
 
-async function AddMealMenu(receipt, token) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MENU;
+async function AddStatus(status, token) {
+  let endpoint = process.env.VUE_APP_GET_ORDER_STATUS;
 
   const body = {
     data: {
-      type: "meal_menu",
-      relationships: {
-        meal: {
-          data: {
-            id: receipt.meal.id,
-            type: "meal",
-          },
-        },
-        ingredient: {
-          data: {
-            id: receipt.menu.id,
-            type: "menu",
-          },
-        },
+      attributes: {
+        status_name: status.status_name,
       },
     },
   };
@@ -73,25 +61,13 @@ async function AddMealMenu(receipt, token) {
   return response.json();
 }
 
-async function UpdateMealMenuById(receipt, token, id) {
-  let endpoint = process.env.VUE_APP_GET_MENU_MEAL_MENU + "/" + id;
+async function UpdateStatusById(status, token, id) {
+  let endpoint = process.env.VUE_APP_GET_ORDER_STATUS + "/" + id;
 
   const body = {
     data: {
-      type: "meal_menu",
-      relationships: {
-        meal: {
-          data: {
-            id: receipt.meal.id,
-            type: "meal",
-          },
-        },
-        ingredient: {
-          data: {
-            id: receipt.menu.id,
-            type: "menu",
-          },
-        },
+      attributes: {
+        status_name: status.status_name,
       },
     },
   };
@@ -110,9 +86,9 @@ async function UpdateMealMenuById(receipt, token, id) {
 }
 
 module.exports = {
-  GetMealMenuList,
-  GetMealMenuById,
-  DeleteMealMenuById,
-  AddMealMenu,
-  UpdateMealMenuById,
+  GetStatusList,
+  GetStatusById,
+  DeleteStatusById,
+  AddStatus,
+  UpdateStatusById,
 };
