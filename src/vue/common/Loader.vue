@@ -9,7 +9,6 @@
 
 <script>
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
   name: "loader",
   props: {
     messageId: { type: String, default: "" },

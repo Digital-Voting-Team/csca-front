@@ -7,7 +7,7 @@ export const useAuthUserStore = defineStore("authStore", {
       displayName: "---",
       isLoggedIn: false,
       token: "",
-      position: 1,
+      position: 5,
     };
   },
   actions: {

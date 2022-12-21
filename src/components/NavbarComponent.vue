@@ -1,76 +1,84 @@
 <template>
-  <div class="navbar">
-    <nav>
-      <img src="@/assets/csca_logo.png" alt="Logo" />
-      <h1><router-link :to="{ name: 'Home' }">CSCA</router-link></h1>
-      <div class="links">
-        <div v-if="userStorage?.isLoggedIn === true">
-          <router-link :to="{ name: 'StaffView' }"> View staff </router-link>
-          <span>Hi there, {{ userStorage?.displayName }}</span>
-          <button @click="handleClick">Logout</button>
-        </div>
-        <div v-else>
-          <router-link class="btn" :to="{ name: 'Signup' }">Signup</router-link>
-          <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
-        </div>
+  <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+    <div class="container">
+      <router-link :to="{ name: 'Home' }" class="navbar-brand">
+        <img class="nav-logo mr-3" src="@/assets/csca_logo.png" alt="Logo"/>
+
+        <span class="d-none d-sm-inline">CSCA</span>
+      </router-link>
+      <div class="d-flex">
+
+        <ul class="navbar-nav d-flex me-2">
+
+          <li class="d-flex d-lg-none" v-if="userStorage?.isLoggedIn === true">
+            <a class="nav-link me-2" href="#">Hi there, {{ userStorage?.displayName }}</a>
+            <button class="btn btn-danger" @click="handleClick">Logout</button>
+          </li>
+
+          <li class="nav-item d-lg-none" v-else>
+            <router-link class="btn btn-primary me-2" :to="{ name: 'Signup' }">Signup</router-link>
+            <router-link class="btn btn-secondary" :to="{ name: 'Login' }">Login</router-link>
+          </li>
+        </ul>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
-    </nav>
-  </div>
+
+
+      <div class="navbar-collapse collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto d-flex justify-content-between w-100">
+          <li class="nav-item d-lg-flex">
+            <a class="nav-link" href="#">Achievements</a>
+            <a class="nav-link" href="#">Our team</a>
+            <a class="nav-link" href="#">Contacts</a>
+            <a class="nav-link" href="#">User manual</a>
+            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'StaffView' }"> View
+              staff
+            </router-link>
+          </li>
+
+          <li class="d-lg-flex d-none d-lg-block" v-if="userStorage?.isLoggedIn === true">
+            <a class="nav-link">Hi there, {{ userStorage?.displayName }}</a>
+            <button class="btn btn-danger" @click="handleClick">Logout</button>
+          </li>
+
+          <li class="nav-item d-none d-lg-block" v-else>
+            <router-link class="btn btn-primary me-2" :to="{ name: 'Signup' }">Signup</router-link>
+            <router-link class="btn btn-secondary" :to="{ name: 'Login' }">Login</router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
 import useLogout from "../composables/useLogout";
-import { useRouter } from "vue-router";
-import { useAuthUserStore } from "@/stores/auth-user";
+import {useRouter} from "vue-router";
+import {useAuthUserStore} from "@/stores/auth-user";
 
 export default {
   setup() {
     const userStorage = useAuthUserStore();
-    const { logout } = useLogout();
+    const {logout} = useLogout();
     const router = useRouter();
 
     const handleClick = async () => {
       await logout(userStorage.username);
       userStorage.isLoggedIn = false;
-      router.push({ name: "Login" });
+      router.push({name: "Login"});
     };
-
-    return { userStorage, logout, handleClick, router };
+    userStorage.isLoggedIn = false
+    return {userStorage, logout, handleClick, router};
   },
 };
 </script>
 
-<style scoped>
-.navbar {
-  padding: 16px 10px;
-  margin-bottom: 60px;
-  background: white;
-}
-nav {
-  display: flex;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+<style>
 nav img {
-  max-height: 60px;
-}
-nav h1 {
-  margin-left: 20px;
-}
-nav .links {
-  margin-left: auto;
-}
-nav .links a,
-button {
-  margin-left: 16px;
-  font-size: 14px;
-}
-span {
-  font-size: 14px;
-  display: inline-block;
-  margin-left: 16px;
-  padding-left: 16px;
-  border-left: 1px solid #eee;
+  max-height: 40px;
 }
 </style>

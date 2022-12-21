@@ -23,10 +23,6 @@
       </div>
       <div class="single-song">
         <p>Position: {{ staff_item.position.name }}</p>
-        <AddStaff
-          v-if="staff_item.position.access_level > 3"
-          :staff_="staff_item"
-        />
       </div>
       <button v-if="staff_item.position.access_level < 4" @click="handleDelete">
         Delete
@@ -36,7 +32,6 @@
 </template>
 
 <script>
-import AddStaff from "@/components/forms/AddStaff.vue";
 import { useRouter } from "vue-router";
 import { useAuthUserStore } from "@/stores/auth-user";
 import { DeleteStaffById, GetStaffById } from "@/requestsBackend/staff";
@@ -45,7 +40,6 @@ import { StaffRecord } from "@/js/records/staff.record";
 
 export default {
   props: ["id"],
-  components: { AddStaff },
   data() {
     return {
       staff_item: undefined,

@@ -3,7 +3,7 @@ version: '3.3'
 services:
   auth-service:
     restart: unless-stopped
-    image: auth-local
+    image: kyrylrs/auth-service
     ports:
       - "9110:9110"
     depends_on:

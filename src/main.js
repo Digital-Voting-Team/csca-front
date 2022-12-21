@@ -4,8 +4,11 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 
+import 'bootstrap';
+
 // styles
-import "./assets/main.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@/assets/main.css'
 
 const pinia = createPinia();
 const app = createApp(App);

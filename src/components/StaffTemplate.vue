@@ -1,19 +1,19 @@
 <template>
-  <h1>Staff list:</h1>
+  <AddStaff v-if="accessLevel > 3" />
+  <h2 class="text-center">Staff list:</h2>
+
   <div id="staff_list" v-for="staff in staff_" :key="staff.id">
-    <router-link
-      :to="{
-        name: 'StaffDetails',
-        params: { id: staff.id },
-      }"
-    >
-      <div class="single">
-        <div class="info">
-          <h3>{{ staff.person.name || "Name" }}</h3>
+    <router-link class="text-reset" :to="{
+      name: 'StaffDetails',
+      params: { id: staff.id },
+    }">
+      <div class="card text-white bg-dark mb-2">
+        <h2 class="card-header">
+          {{ staff.person.name || "Name" }}
+        </h2>
+        <div class="card-body d-flex justify-content-between">
           <p>Employment date: {{ staff.employment_date || "date" }}</p>
-        </div>
-        <div class="staff-salary">
-          <p>salary {{ staff.salary || "0" }}$</p>
+          <strong>salary {{ staff.salary || "0" }}$</strong>
         </div>
       </div>
     </router-link>
@@ -21,41 +21,20 @@
 </template>
 
 <script>
+import AddStaff from "@/components/forms/AddStaff.vue";
+import { useAuthUserStore } from "@/stores/auth-user";
+
 export default {
   props: ["staff_"],
+  components: { AddStaff },
+  setup() {
+    const userStorage = useAuthUserStore();
+    const accessLevel = userStorage.position;
+    return { accessLevel };
+  },
 };
 </script>
 
-<style scoped>
-.single {
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border-radius: 10px;
-  background: white;
-  margin: 16px 0;
-  transition: all ease 0.2s;
-}
-.single:hover {
-  box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.05);
-  transform: scale(1.02);
-  transition: all ease 0.2s;
-}
-.thumbnail {
-  max-width: 100px;
-  max-height: 100px;
-  overflow: hidden;
-  border-radius: 10px;
-}
-img {
-  max-width: 150%;
-  max-height: 150%;
-  display: block;
-}
-.info {
-  margin: 0 30px;
-}
-.staff-salary {
-  margin-left: auto;
-}
+<style>
+
 </style>

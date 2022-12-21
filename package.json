@@ -5,34 +5,34 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lint-fix": "npm run lint-js-fix && npm run lint-json-fix",
+    "lint-json-fix": "prettier --write \"./[a-zA-Z0-9.]+(?!-lock).json\"",
+    "lint-js-fix": "prettier --write \"./**/*.js\""
   },
   "dependencies": {
     "@sentry/browser": "^7.24.2",
     "@sentry/integrations": "^7.24.2",
     "bignumber.js": "^9.1.1",
+    "bootstrap": "^5.2.3",
     "core-js": "^3.8.3",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.1.1",
+    "jquery": "^3.6.2",
     "lodash": "^4.17.21",
     "loglevel": "^1.8.1",
     "pinia": "^2.0.27",
+    "popper.js": "^1.16.1",
     "register-service-worker": "^1.7.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^8.0.3",
     "node-sass": "^8.0.0",
     "prettier": "^2.4.1",
     "sass-loader": "^13.2.0"
