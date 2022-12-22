@@ -35,26 +35,7 @@
               Home
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'OrderView' }"> View
-              orders
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'StaffEffectiveness' }">
-              Staff effectiveness
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'MealPopularity' }">
-              Meal popularity
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link v-if="userStorage?.isLoggedIn === true" class="nav-link" :to="{ name: 'DeliveryCount' }">
-              Delivery count
-            </router-link>
-          </li>
+
           <li class="nav-item dropdown" v-if="userStorage?.isLoggedIn === true">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
               aria-expanded="false">Views</a>
@@ -72,6 +53,33 @@
               <li>
                 <router-link class="dropdown-item" :to="{ name: 'MealView' }">
                   Meals
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="dropdown-item" :to="{ name: 'OrderView' }">
+                  Orders
+                </router-link>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown" v-if="userStorage?.isLoggedIn === true">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+              aria-expanded="false">Analytics</a>
+            <ul class="dropdown-menu">
+              <li class="nav-item">
+                <router-link class="dropdown-item" :to="{ name: 'StaffEffectiveness' }">
+                  Staff effectiveness
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="dropdown-item" :to="{ name: 'MealPopularity' }">
+                  Meal popularity
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="dropdown-item" :to="{ name: 'DeliveryCount' }">
+                  Delivery count
                 </router-link>
               </li>
             </ul>
