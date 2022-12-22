@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <main>
+  <main class="constainer-fluid bg-light">
     <router-view />
   </main>
   <Footer />

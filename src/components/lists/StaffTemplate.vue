@@ -1,6 +1,4 @@
 <template>
-  <h2 class="text-center">Staff list:</h2>
-
   <div id="staff_list" v-for="staff in staff_" :key="staff.id">
     <router-link class="text-reset" :to="{
       name: 'StaffDetails',

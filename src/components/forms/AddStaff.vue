@@ -1,15 +1,46 @@
 <template>
   <div class="add-item">
-    <button class="btn btn-primary" v-if="!showForm" @click="showForm = true">Add Staff</button>
-    <form v-if="showForm" @submit.prevent="handleSubmit">
-      <h4>Add a New Staff member</h4>
-      <input type="text" placeholder="Name" required v-model="name" />
-      <input type="text" placeholder="Salary" required v-model="salary" />
-      <input type="text" placeholder="Username" required v-model="username" />
-      <input type="text" placeholder="Password" required v-model="password" />
-      <button>Add</button>
-      <p v-if="isError">Could not execute operation</p>
-    </form>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStaff">
+      Add Staff
+    </button>
+
+    <div class="modal fade" id="addStaff" tabindex="-1" aria-labelledby="addStaffLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="addStaffLabel">Add a New Staff member</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label" for="name">Name</label>
+              <input class="form-control" id="name" type="text" placeholder="Name" v-model="name" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="salary">Salary</label>
+              <input class="form-control" id="salary" type="number" placeholder="Salary" v-model="salary" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="username">Username</label>
+              <input class="form-control" id="username" type="text" placeholder="Username" v-model="username"
+                required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input class="form-control" id="password" type="password" placeholder="Password" v-model="password"
+                required />
+            </div>
+            <div class="alert alert-danger" role="alert" v-if="isError">
+              A simple danger alert—check it out!
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="handleSubmit">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -35,6 +66,7 @@ export default {
     const userStorage = useAuthUserStore();
 
     const handleSubmit = async () => {
+      console.log("alskjf")
       const address = {
         building_number: 1,
         street: "string",
@@ -94,15 +126,4 @@ export default {
 
   },
 };
-</script>
-
-<style scoped>
-.add-item {
-  text-align: center;
-  margin-top: 40px;
-}
-form {
-  max-width: 100%;
-  text-align: left;
-}
-</style>
+</script> 

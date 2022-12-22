@@ -1,26 +1,28 @@
 <template>
-  <h2>Delivery count</h2>
-  <div v-if="deliveries.length">
-    <LineChart :dict="GetDataDict(deliveries)"></LineChart>
+  <div class="container py-4" v-if="deliveries.length">
+    <h2 class="text-center mb-4">Delivery count</h2>
+    <div>
+      <LineChart :dict="GetDataDict(deliveries)"></LineChart>
+    </div>
   </div>
   <div v-else>
-    <loader/>
+    <loader />
   </div>
 </template>
 
 <script>
-import {useAuthUserStore} from "@/stores/auth-user";
-import {ref} from "vue";
-import {ErrorHandler} from "@/js/helpers/error-handler";
+import { useAuthUserStore } from "@/stores/auth-user";
+import { ref } from "vue";
+import { ErrorHandler } from "@/js/helpers/error-handler";
 import GetDataDict from "@/requestsBackend/analyticalRequests/deliveryCount";
 import LineChart from "@/components/charts/Line";
-import {GetDeliveryList} from "@/requestsBackend/orderRequests/delivery";
-import {DeliveryRecord} from "@/js/records/orderRecords/delivery.record";
+import { GetDeliveryList } from "@/requestsBackend/orderRequests/delivery";
+import { DeliveryRecord } from "@/js/records/orderRecords/delivery.record";
 import Loader from "@/vue/common/Loader";
 
 export default {
   name: "DeliveryCount",
-  components: {LineChart, Loader},
+  components: { LineChart, Loader },
   setup() {
     const userStorage = useAuthUserStore()
     const deliveries = ref([])
@@ -40,7 +42,7 @@ export default {
     }
     loadDeliveries()
 
-    return {deliveries, GetDataDict}
+    return { deliveries, GetDataDict }
   }
 }
 </script>

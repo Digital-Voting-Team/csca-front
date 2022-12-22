@@ -1,7 +1,9 @@
 <template>
-  <div class="loader" :class="{ 'loader--position-center': positionCenter }">
-    <div class="loader__animation" />
-    <div class="loader__message" v-if="messageId">
+  <div class="spinner d-flex flex-column">
+    <div class="spinner-border text-primary mx-auto mb-3" style="width: 3rem; height: 3rem;" role="status">
+    </div>
+
+    <div class="alert alert-warning" role="alert" v-if="messageId">
       {{ messageId }}
     </div>
   </div>
@@ -17,57 +19,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.loader {
-  display: flex;
-  align-items: center;
-}
-
-.loader--position-center {
-  justify-content: center;
-}
-
-.loader__message {
-  color: cadetblue;
-}
-
-.loader__animation {
-  width: 5rem;
-  height: 5rem;
-  border-radius: 50%;
-  position: relative;
-  margin-right: 0.5rem;
-
-  &:after,
-  &:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    width: 3rem;
-    height: 3rem;
-    border: 0.5rem solid transparent;
-    border-bottom: 0.5rem solid darkgray;
-    border-radius: 50%;
-    animation: rotate 1s linear infinite;
-  }
-
-  &:before {
-    width: 4rem;
-    height: 4rem;
-    animation-direction: reverse;
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+<style>
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
