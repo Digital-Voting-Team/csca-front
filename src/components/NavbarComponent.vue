@@ -86,7 +86,7 @@
           </li>
         </ul>
 
-        <ul class="navbar-nav d-flex me-2">
+        <ul class="navbar-nav d-flex">
 
           <li class="d-none d-lg-flex" v-if="userStorage?.isLoggedIn === true">
             <a class="nav-link me-2" href="#">Hi there, {{ userStorage?.displayName }}</a>
